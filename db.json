@@ -1,4 +1,4 @@
-[
+{ "data": [
     {
         "name": "Sistemas de Informação",
         "campus": "CTC",
@@ -57,3 +57,4 @@
         "id": 3
     }
 ]
+}

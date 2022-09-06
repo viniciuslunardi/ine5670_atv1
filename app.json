@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "guia-cursos-ufsc",
+    "slug": "snack-55d5fbcb-a8f4-47fe-b513-56aeff151387",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/ufsclogo.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/ufsclogo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#6883BA"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/ufsclogo.png"
+    }
+  }
+}

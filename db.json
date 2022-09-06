@@ -1,0 +1,59 @@
+[
+    {
+        "name": "Sistemas de Informação",
+        "campus": "CTC",
+        "shift": "Noturno",
+        "hours": 3000,
+        "coords": [ 0.123, 0.321 ],
+        "images": [
+            {
+                "icon": "./assets/ufsclogo.png",
+                "class": [
+                    "./assets/ufsclogo.png"
+                ]
+            }
+        ],
+        "video": "./assets/ufsclogo.png",
+        "email": "sin@ufsc.br",
+        "site": "sistemas.ufsc.br",
+        "id": 1
+    },
+    {
+        "name": "Administração",
+        "campus": "CCE",
+        "shift": "Noturno",
+        "hours": 3000,
+        "coords": [ 0.123, 0.321 ],
+        "images": [
+            {
+                "icon": "./assets/ufsclogo.png",
+                "class": [
+                    "./assets/ufsclogo.png"
+                ]
+            }
+        ],
+        "video": "./assets/ufsclogo.png",
+        "email": "sin@ufsc.br",
+        "site": "sistemas.ufsc.br",
+        "id": 2
+    },
+    {
+        "name": "Medicina",
+        "campus": "CCS",
+        "shift": "Noturno",
+        "hours": 3000,
+        "coords": [ 0.123, 0.321 ],
+        "images": [
+            {
+                "icon": "./assets/ufsclogo.png",
+                "class": [
+                    "./assets/ufsclogo.png"
+                ]
+            }
+        ],
+        "video": "./assets/ufsclogo.png",
+        "email": "sin@ufsc.br",
+        "site": "sistemas.ufsc.br",
+        "id": 3
+    }
+]

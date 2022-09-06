@@ -1,60 +1,101 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Button, Linking, Platform} from 'react-native';
- 
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  Linking,
+  Platform
+} from 'react-native';
+
 const mapUrl = Platform.select({
-   ios: 'maps:0,0?q=' /* valor de mapUrl caso iOS */ ,
-   android: 'geo:0,0?q=' /* valor de mapUrl caso Android */
+  ios: 'maps:0,0?q=',
+  android: 'geo:0,0?q='
 });
 
 export default class ClassDetailsScreen extends React.Component {
   static navigationOptions = {
     title: 'Dados do Curso',
   };
- 
+
   constructor(props) {
     super(props);
     const course = props.navigation.getParam('class');
     this.state = {
       name: course.name,
       email: course.email,
-      phone: course.phone,
-      lat: course.address.geo.lat,
-      lng: course.address.geo.lng,
-      
+      campus: course.campus,
+      shift: course.shift,
+      hours: course.hours,
+      images: course.images,
+      lat: course.coords[0],
+      lng: course.coords[1],
+      video: course.video,
+      site: course.site,
     };
   }
 
   render() {
     const { navigate } = this.props.navigation;
-    const { name, email, phone, lat, lng } = this.state;
+    const {
+      name,
+      email,
+      campus,
+      shift,
+      lat,
+      lng,
+      hours,
+      phone,
+      images,
+      video,
+      site } = this.state;
+
     return (
       <View>
+       
         <View style={styles.container}>
           <Text style={styles.contactName}>{name}</Text>
+          <Text style={styles.contactDetails}>Logo:</Text>
+          <Image style={styles.logo} source={require('../assets/ufsclogo.png')} />
           <Text style={styles.contactDetails}>E-mail: {email}</Text>
-          <Text style={styles.contactDetails}>Telefone: {phone}</Text>
+          <Text style={styles.contactDetails}>Site: {site}</Text>
+          <Text style={styles.contactDetails}>Campus: {campus}</Text>
+          <Text style={styles.contactDetails}>Turno: {shift}</Text>
+          <Text style={styles.contactDetails}>Carga horária: {hours}</Text>
+          <Text style={styles.contactDetails}>Salas de aula:</Text>
+          <Image style={styles.image} source={require('../assets/ufsclogo.png')} />
+          <Image style={styles.image} source={require('../assets/ufsclogo.png')} />
         </View>
+       
         <View style={styles.button} >
-          <Button onPress={() => Linking.openURL(`mailto:${email}`) }
-            title="Enviar E-mail" />
+          <Button onPress={() => Linking.openURL(`mailto:${email}`)}
+            title="Enviar E-mail para coordenadoria" />
         </View>
+       
         <View style={styles.button} >
-        <Button onPress={() => Linking.openURL(`tel:${phone}`) }
-          title="Ligar" />
+          <Button onPress={() => console.log("Favoritou! //TODO")}
+            title="Favoritar" />
         </View>
-    
+      
+        {/* <View style={styles.button} >
+          <Button onPress={() => Linking.openURL(`tel:${phone}`)}
+            title="Telefonar para coordenadoria" />
+        </View> */}
+
         <View style={styles.button} >
-        <Button onPress={() => Linking.openURL(`${mapUrl}${lat},${lng}`) }
-          title="Coordenadas" />
+          <Button onPress={() => Linking.openURL(`${mapUrl}${lat},${lng}`)}
+            title="Coordenadas para o campus" />
         </View>
+       
         <View style={styles.button} >
           <Button title="Voltar" onPress={() => navigate('ClassesList')} />
         </View>
+
       </View>
     );
   }
 }
- 
+
 const styles = StyleSheet.create({
   container: {
     padding: 15,
@@ -70,5 +111,13 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 15
-  }
+  },
+  image: {
+    height: 230/2,
+    width: 160/2,
+  },
+  logo: {
+    height: 230,
+    width: 160,
+  },
 });

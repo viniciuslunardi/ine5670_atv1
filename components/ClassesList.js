@@ -27,10 +27,11 @@ export default class ClassesListScreen extends React.Component {
       return fetch('https://atv1backend.herokuapp.com/classes')
         .then((response) => response.json())
         .then((json) => {
+          console.log(json);
           this.setState(
             {
               isLoading: false,
-              classes: json,
+              classes: json.data,
             },
             function () { }
           );

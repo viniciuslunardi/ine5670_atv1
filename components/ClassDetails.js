@@ -3,6 +3,7 @@ import {
   Text,
   View,
   StyleSheet,
+  Image,
   Button,
   Linking,
   Platform

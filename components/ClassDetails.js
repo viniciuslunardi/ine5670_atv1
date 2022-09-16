@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Image,
+  ScrollView,
   Button,
   Linking,
   Platform
@@ -28,6 +29,7 @@ export default class ClassDetailsScreen extends React.Component {
       campus: course.campus,
       shift: course.shift,
       hours: course.hours,
+      phone: course.phone,
       images: course.images,
       lat: course.coords[0],
       lng: course.coords[1],
@@ -51,21 +53,37 @@ export default class ClassDetailsScreen extends React.Component {
       video,
       site } = this.state;
 
+
+      const classImages = [];
+
+      for (const image of images[0].class) {
+    
+        classImages.push(
+          <View key = { image }>
+            <Image style={styles.image} source={{ uri: image }} />
+          </View>
+        )
+      }
+
     return (
-      <View>
+      <ScrollView>
        
         <View style={styles.container}>
           <Text style={styles.contactName}>{name}</Text>
-          <Text style={styles.contactDetails}>Logo:</Text>
-          <Image style={styles.logo} source={require('../assets/ufsclogo.png')} />
-          <Text style={styles.contactDetails}>E-mail: {email}</Text>
-          <Text style={styles.contactDetails}>Site: {site}</Text>
-          <Text style={styles.contactDetails}>Campus: {campus}</Text>
-          <Text style={styles.contactDetails}>Turno: {shift}</Text>
-          <Text style={styles.contactDetails}>Carga horária: {hours}</Text>
-          <Text style={styles.contactDetails}>Salas de aula:</Text>
-          <Image style={styles.image} source={require('../assets/ufsclogo.png')} />
-          <Image style={styles.image} source={require('../assets/ufsclogo.png')} />
+          
+          <Image style={styles.logo} source={{ uri: images[0].icon}} />
+
+          <Text style={styles.classDetails}>E-mail: {email}</Text>
+          <Text style={styles.classDetails}>Site: {site}</Text>
+          <Text style={styles.classDetails}>Telefone: {phone}</Text>
+
+          <Text style={styles.classDetails}>Campus: {campus}</Text>
+          <Text style={styles.classDetails}>Turno: {shift}</Text>
+          <Text style={styles.classDetails}>Carga horária: {hours}</Text>
+          <Text style={styles.classDetails}>Salas de aula:</Text>
+          
+         { classImages }
+        
         </View>
        
         <View style={styles.button} >
@@ -78,10 +96,10 @@ export default class ClassDetailsScreen extends React.Component {
             title="Favoritar" />
         </View>
       
-        {/* <View style={styles.button} >
+        <View style={styles.button} >
           <Button onPress={() => Linking.openURL(`tel:${phone}`)}
             title="Telefonar para coordenadoria" />
-        </View> */}
+        </View>
 
         <View style={styles.button} >
           <Button onPress={() => Linking.openURL(`${mapUrl}${lat},${lng}`)}
@@ -92,7 +110,7 @@ export default class ClassDetailsScreen extends React.Component {
           <Button title="Voltar" onPress={() => navigate('ClassesList')} />
         </View>
 
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -106,7 +124,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     height: 44,
   },
-  contactDetails: {
+  classDetails: {
     fontSize: 16,
     height: 44,
   },
@@ -114,11 +132,11 @@ const styles = StyleSheet.create({
     padding: 15
   },
   image: {
-    height: 230/2,
-    width: 160/2,
-  },
-  logo: {
     height: 230,
     width: 160,
+  },
+  logo: {
+    height: 180,
+    width: 250,
   },
 });

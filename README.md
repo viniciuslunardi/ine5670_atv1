@@ -11,4 +11,4 @@ TODO
 
 - tela de favoritos
 - revisar código
-- talvez estilizar mais as telas...
+- talvez estilizar mais as telas

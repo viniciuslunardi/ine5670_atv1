@@ -52,6 +52,7 @@ export default class ClassDetailsScreen extends React.Component {
       images,
       video,
       site,
+      favorite
     } = this.state;
 
     const classImages = [];
@@ -65,6 +66,8 @@ export default class ClassDetailsScreen extends React.Component {
     }
 
     const app = video.split("v=")[1];
+
+    const isFavorite = favorite ? "Sim" :  "Não";
 
     return (
       <ScrollView>
@@ -80,8 +83,9 @@ export default class ClassDetailsScreen extends React.Component {
           <Text style={styles.classDetails}>Campus: {campus}</Text>
           <Text style={styles.classDetails}>Turno: {shift}</Text>
           <Text style={styles.classDetails}>Carga horária: {hours}</Text>
-          <Text style={styles.classDetails}>Salas de aula:</Text>
+          <Text style={styles.classDetails}>Favorito: {isFavorite}</Text>
 
+          <Text style={styles.classDetails}>Salas de aula:</Text>
           {classImages}
         </View>
 
@@ -119,9 +123,9 @@ export default class ClassDetailsScreen extends React.Component {
               Linking.canOpenURL(`vnd.youtube://${app}`).then((supported) => {
                 if (supported) {
                   return Linking.openURL(`vnd.youtube://${app}`);
-                } else {
-                  return Linking.openURL(video);
                 }
+                
+                return Linking.openURL(video);
               })
             }
             title="Vídeo informativo"

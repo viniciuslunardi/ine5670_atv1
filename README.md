@@ -4,7 +4,6 @@ Guia de Cursos - UFSC
 
 TODO
 - implementar funcionalidades das telas https://vestibularunificado2023.ufsc.br/guia-de-cursos/
-    - vídeo do curso (pode ser link pro youtube)
     - favoritar curso https://snack.expo.dev/@frank-siqueira/async-storage-example
     
 - setar dados de favoritos em cache/localstorage https://snack.expo.dev/@frank-siqueira/async-storage-example

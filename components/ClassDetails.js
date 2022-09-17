@@ -10,6 +10,8 @@ import {
   Platform,
 } from "react-native";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const mapUrl = Platform.select({
   ios: "maps:0,0?q=",
   android: "geo:0,0?q=",
@@ -18,6 +20,12 @@ const mapUrl = Platform.select({
 export default class ClassDetailsScreen extends React.Component {
   static navigationOptions = {
     title: "Dados do Curso",
+  };
+
+  favoriteCourse = async () => {
+    const course = this.state.name;
+    await AsyncStorage.setItem(`${course}.favorite`, "true");
+    this.setState({ favorite: "Sim" });
   };
 
   constructor(props) {
@@ -35,6 +43,7 @@ export default class ClassDetailsScreen extends React.Component {
       lng: course.coords[1],
       video: course.video,
       site: course.site,
+      favorite: "Não",
     };
   }
 
@@ -52,7 +61,6 @@ export default class ClassDetailsScreen extends React.Component {
       images,
       video,
       site,
-      favorite
     } = this.state;
 
     const classImages = [];
@@ -67,7 +75,12 @@ export default class ClassDetailsScreen extends React.Component {
 
     const app = video.split("v=")[1];
 
-    const isFavorite = favorite ? "Sim" :  "Não";
+    AsyncStorage.getItem(`${this.state.name}.favorite`).then((value) => {
+      console.log(value);
+      if (value === "true") {
+        this.setState({ favorite: "Sim" });
+      }
+    });
 
     return (
       <ScrollView>
@@ -83,7 +96,9 @@ export default class ClassDetailsScreen extends React.Component {
           <Text style={styles.classDetails}>Campus: {campus}</Text>
           <Text style={styles.classDetails}>Turno: {shift}</Text>
           <Text style={styles.classDetails}>Carga horária: {hours}</Text>
-          <Text style={styles.classDetails}>Favorito: {isFavorite}</Text>
+          <Text style={styles.classDetails}>
+            Favorito: {this.state.favorite}
+          </Text>
 
           <Text style={styles.classDetails}>Salas de aula:</Text>
           {classImages}
@@ -97,10 +112,7 @@ export default class ClassDetailsScreen extends React.Component {
         </View>
 
         <View style={styles.button}>
-          <Button
-            onPress={() => console.log("Favoritou! //TODO")}
-            title="Favoritar"
-          />
+          <Button onPress={this.favoriteCourse} title="Favoritar" />
         </View>
 
         <View style={styles.button}>
@@ -124,7 +136,7 @@ export default class ClassDetailsScreen extends React.Component {
                 if (supported) {
                   return Linking.openURL(`vnd.youtube://${app}`);
                 }
-                
+
                 return Linking.openURL(video);
               })
             }

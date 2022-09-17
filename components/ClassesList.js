@@ -33,12 +33,21 @@ export default class ClassesListScreen extends React.Component {
       const data = await this.reloadData();
 
       const viewMode = await AsyncStorage.getItem("viewMode");
-      console.log(data);
       if (!viewMode || viewMode === "todos") {
         await AsyncStorage.setItem("viewMode", "favorites");
         this.setState({ filterText: "Ver todos os cursos" });
 
-        const filteredData = data.filter((el) => el.favorite);
+        const mapPromise = data.map(async (el) => {
+          const value = await AsyncStorage.getItem(`${el.name}.favorite`);
+
+          if (value === "true") el.favorite = true;
+          return el;
+        });
+
+        const newArr = await Promise.all(mapPromise);
+
+        const filteredData = newArr.filter((el) => el.favorite);
+
         this.setState({
           isLoading: false,
           classes: filteredData,
@@ -110,7 +119,12 @@ export default class ClassesListScreen extends React.Component {
         />
 
         <Button title={this.state.filterText} onPress={this.filterFavorites} />
-        <Button title="Voltar" onPress={() => navigate("Home")} />
+        <Button
+          title="Voltar"
+          onPress={() => {
+            navigate("Home");
+          }}
+        />
       </ScrollView>
     );
   }
